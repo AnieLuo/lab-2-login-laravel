@@ -1,61 +1,98 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+LABORATORIO N°2 - CIERRE
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+INTRODUCCIÓN
+Este laboratorio tuvo como objetivo comprender la estructura básica de un proyecto en Laravel bajo el patrón Modelo-Vista-Controlador (MVC), así como implementar el módulo de login y registro de usuarios.
+Laravel organiza sus proyectos en torno a la arquitectura MVC:
+⦁	Modelos: Representan la lógica y estructura de datos.
+⦁	Vistas: Definen la interfaz que interactúa con el usuario.
+⦁	Controladores: Contienen la lógica que conecta los modelos con las vistas.
+⦁	Rutas: Definen cómo se redirigen las peticiones HTTP hacia los controladores.
+Además, se trabajó con migraciones para generar las tablas necesarias en la base de datos.
 
-## About Laravel
+Requisitos Previos
+Para ejecutar este laboratorio, se utilizó el siguiente ecosistema de desarrollo:
+⦁	PHP 8.2.26
+⦁	Composer (última versión estable)
+⦁	Laravel (instalación mediante composer create-project)
+⦁	Servidor local: WampServer
+⦁	Base de datos: MySQL (phpMyAdmin)
+⦁	Editor: Visual Studio Code
+⦁	Node.js y npm (para compilación de assets front-end)
+⦁	Sistema operativo: Windows 10
+⦁	Dependencias y Comandos principales:
+	# Creación de proyecto
+	composer create-project laravel/laravel login-lab
+	# Instalación de dependencias
+	composer install
+	# Generación de clave
+	php artisan key:generate
+	# Migraciones
+	php artisan migrate
+	php artisan migrate:fresh
+	# Instalación de UI para autenticación
+	composer require laravel/ui
+	php artisan ui bootstrap --auth
+	# Compilación de assets
+	npm install
+	npm run dev
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Flujo de Trabajo del Laboratorio
+1.	Configuración del entorno de PHP y Composer.
+2.	Creación del proyecto Laravel.
+3.	Configuración del archivo .env con la base de datos.
+4.	Generación de la clave de aplicación (APP_KEY).
+5.	Ejecución de migraciones.
+6.	Instalación del paquete de autenticación.
+7.	Instalación de Node.js y compilación de assets.
+8.	Despliegue del servidor y verificación del login y registro.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Resultados
+El sistema permitió:
+⦁	Registro de nuevos usuarios.
+⦁	Inicio de sesión exitoso.
+⦁	Verificación de datos en la base de datos.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Base de Datos
+⦁	Se creó una base de datos en MySQL llamada lab_2_login.
+⦁	Se configuró la conexión en el archivo .env:
+	DB_CONNECTION=mysql
+	DB_HOST=127.0.0.1
+	DB_PORT=3306
+	DB_DATABASE=lab_2_login
+	DB_USERNAME=root
+	DB_PASSWORD=
+⦁	Migraciones aplicadas: users, password_resets, failed_jobs, personal_access_tokens.
+⦁	Se utilizó el comando php artisan migrate:fresh para resolver conflictos de duplicación de tablas.
 
-## Learning Laravel
+Dificultades y Soluciones
+⦁	PHP no reconocido en CMD
+	Solución: agregar la ruta de PHP al Path de Windows.
+⦁	Error al configurar usuario de Composer
+	Solución: configuración realizada con Git en lugar de Composer.
+⦁	No se generaba el APP_KEY
+	Solución: instalar Composer antes de generar la clave.
+⦁	Error en migración: “Specified key was too long”
+	Solución: configuración de Schema::defaultStringLength(191) en AppServiceProvider.
+⦁	Tablas duplicadas en migración
+	Solución: comando php artisan migrate:fresh.
+⦁	npm no instalado
+	Solución: instalar Node.js y volver a compilar los assets.
+⦁	Error en middleware
+	Solución: cambiar App\Http\Controllers\Controller por Illuminate\Routing\Controller.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Referencias
+https://laravel.com
+https://stackoverflow.com/questions/35117781/class-app-http-controllers-controller-not-found-laravel-5-2
+https://stackoverflow.com/questions/1814532/mysql-error-1071-specified-key-was-too-long-max-key-length-is-767-bytes
+https://getcomposer.org/doc
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+Información del Desarrollador
+Este laboratorio ha sido desarrollado por una estudiante de la Universidad Tecnológica de Panamá:
+Nombre: Anie Luo
+Correo: anie.luo@utp.ac.pa
+Curso: Ingeniería Web
+Instructor del Laboratorio: Irina Fong
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Fechas
+Fecha de ejecución del laboratorio: 14 de septiembre de 2025
+Fecha de entrega: 29 de septiembre de 2025
